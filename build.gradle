@@ -36,4 +36,8 @@ ext {
     picassoVersion = '2.5.2'
     butterknifeVersion = '8.5.1'
     mockitoVersion = '1.10.19'
+    retrofitVersion = '2.2.0'
+    okHttpVersion = '3.6.0'
+    javaxVersion = '1.2'
+    gsonVersion = '2.7'
 }

@@ -25,6 +25,11 @@ dependencies {
     compile "com.android.support:design:${project.supportLibraryVersion}"
     compile "com.android.support:appcompat-v7:${project.supportLibraryVersion}"
     compile "com.squareup.picasso:picasso:${project.picassoVersion}"
+    compile "com.squareup.retrofit2:retrofit:${project.retrofitVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${project.retrofitVersion}"
+    compile "com.squareup.okhttp3:logging-interceptor:${project.okHttpVersion}"
+    compile "javax.annotation:javax.annotation-api:${project.javaxVersion}"
+    compile "com.google.code.gson:gson:${project.gsonVersion}"
     compile "com.jakewharton:butterknife:${project.butterknifeVersion}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${project.butterknifeVersion}"
 
