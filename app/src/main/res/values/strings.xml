@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Reddit</string>
+    <string name="no_data_available">There is no data available.</string>
 </resources>
