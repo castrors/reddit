@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements Callback<RedditOb
         ApiService apiService =
                 ApiClient.getClient().create(ApiService.class);
 
-        Call<RedditObject> call = apiService.fetchAndroidPosts();
+        Call<RedditObject> call = apiService.fetchPosts("Android");
         call.enqueue(this);
     }
 
