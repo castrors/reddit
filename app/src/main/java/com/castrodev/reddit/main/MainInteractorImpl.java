@@ -14,11 +14,11 @@ import retrofit2.Response;
 
 public class MainInteractorImpl implements MainInteractor {
     @Override
-    public void requestPosts(final OnFinishedListener listener) {
+    public void requestPosts(String after, String limit, final OnFinishedListener listener) {
         ApiService apiService =
                 ApiClient.getClient().create(ApiService.class);
 
-        Call<RedditObject> call = apiService.fetchPosts("Android");
+        Call<RedditObject> call = apiService.fetchPosts(after, limit);
         call.enqueue(new Callback<RedditObject>() {
             @Override
             public void onResponse(Call<RedditObject> call, Response<RedditObject> response) {

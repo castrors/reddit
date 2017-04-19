@@ -12,5 +12,5 @@ public interface MainInteractor {
         void onFinished(RedditObject items);
     }
 
-    void requestPosts(OnFinishedListener listener);
+    void requestPosts(String after, String limit, OnFinishedListener listener);
 }

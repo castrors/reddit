@@ -9,4 +9,5 @@ public interface MainPresenter {
     void onResume();
     void onItemClicked(int position);
     void onDestroy();
+    void paginate(String after);
 }

@@ -22,7 +22,7 @@ public class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinish
             mainView.showProgress();
         }
 
-        mainInteractor.requestPosts(this);
+        mainInteractor.requestPosts("", "10", this);
     }
 
     @Override
@@ -38,9 +38,14 @@ public class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinish
     }
 
     @Override
+    public void paginate(String after) {
+        mainInteractor.requestPosts(after, "10", this);
+    }
+
+    @Override
     public void onFinished(RedditObject redditObject) {
         if (mainView != null) {
-            mainView.setItems(redditObject.getData().getChildren());
+            mainView.setItems(redditObject);
             mainView.hideProgress();
         }
     }

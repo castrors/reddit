@@ -13,12 +13,10 @@ import android.widget.Toast;
 import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.RedditObject;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends AppCompatActivity implements MainView, ScrollLastItemCallback {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -68,13 +66,23 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void setItems(List<RedditObject> items) {
+    public void setItems(RedditObject redditObject) {
         rvPosts.setLayoutManager(new LinearLayoutManager(rvPosts.getContext()));
-        rvPosts.setAdapter(new MainAdapter(items));
+        MainAdapter adapter = (MainAdapter) rvPosts.getAdapter();
+        if (adapter != null) {
+            adapter.concatenateDataSet(redditObject);
+        } else {
+            rvPosts.setAdapter(new MainAdapter(redditObject, this));
+        }
     }
 
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onScrollLastItemCallback(String after) {
+        presenter.paginate(after);
     }
 }

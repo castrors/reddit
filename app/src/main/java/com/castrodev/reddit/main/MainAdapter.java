@@ -15,7 +15,9 @@ import java.util.List;
  */
 
 class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
+    private final ScrollLastItemCallback callback;
     private List<RedditObject> mDataset;
+    private RedditObject parent;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView mTextView;
@@ -23,11 +25,21 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         ViewHolder(TextView v) {
             super(v);
             mTextView = v;
+
         }
     }
 
-    MainAdapter(List<RedditObject> myDataset) {
-        mDataset = myDataset;
+    MainAdapter(RedditObject parent, ScrollLastItemCallback callback) {
+        this.parent = parent;
+        this.callback = callback;
+        mDataset = parent.getData().getChildren();
+
+    }
+
+    public void concatenateDataSet(RedditObject redditObject) {
+        mDataset.addAll(redditObject.getData().getChildren());
+        parent = redditObject;
+        parent.getData().setChildren(mDataset);
     }
 
     @Override
@@ -41,8 +53,15 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        if(isLast(position)){
+            callback.onScrollLastItemCallback(parent.getData().getAfter());
+        }
         holder.mTextView.setText(mDataset.get(position).getData().getTitle());
 
+    }
+
+    private boolean isLast(int position) {
+        return mDataset.get(position).getData().getName().equals(parent.getData().getAfter());
     }
 
     @Override
