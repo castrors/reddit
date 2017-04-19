@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.castrodev.reddit.MainActivity">
+    tools:context="com.castrodev.reddit.main.MainActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -39,6 +39,11 @@
             android:gravity="center"
             android:visibility="gone"
             android:text="@string/no_data_available" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </FrameLayout>
 
     </android.support.design.widget.CoordinatorLayout>

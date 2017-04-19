@@ -45,8 +45,6 @@ public class Data {
     private String mDomain;
     @SerializedName("downs")
     private Long mDowns;
-    @SerializedName("edited")
-    private Boolean mEdited;
     @SerializedName("gilded")
     private Long mGilded;
     @SerializedName("hidden")
@@ -266,14 +264,6 @@ public class Data {
 
     public void setDowns(Long downs) {
         mDowns = downs;
-    }
-
-    public Boolean getEdited() {
-        return mEdited;
-    }
-
-    public void setEdited(Boolean edited) {
-        mEdited = edited;
     }
 
     public Long getGilded() {
