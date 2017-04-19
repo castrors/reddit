@@ -6,7 +6,7 @@ import com.castrodev.reddit.model.RedditObject;
  * Created by rodrigocastro on 18/04/17.
  */
 
-public interface MainView {
+interface MainView {
 
     void showProgress();
     void hideProgress();

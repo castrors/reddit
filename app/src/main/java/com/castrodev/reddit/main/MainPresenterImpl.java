@@ -6,12 +6,12 @@ import com.castrodev.reddit.model.RedditObject;
  * Created by rodrigocastro on 18/04/17.
  */
 
-public class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListener {
+class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListener {
 
     private MainView mainView;
     private MainInteractor mainInteractor;
 
-    public MainPresenterImpl(MainView mainView, MainInteractor mainInteractor) {
+    MainPresenterImpl(MainView mainView, MainInteractor mainInteractor) {
         this.mainView = mainView;
         this.mainInteractor = mainInteractor;
     }

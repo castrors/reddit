@@ -12,7 +12,7 @@ import retrofit2.Response;
  * Created by rodrigocastro on 18/04/17.
  */
 
-public class MainInteractorImpl implements MainInteractor {
+class MainInteractorImpl implements MainInteractor {
     @Override
     public void requestPosts(String after, String limit, final OnFinishedListener listener) {
         ApiService apiService =

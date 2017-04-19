@@ -2,8 +2,8 @@ package com.castrodev.reddit.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -16,7 +16,7 @@ import com.castrodev.reddit.model.RedditObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView, ScrollLastItemCallback {
+public class MainActivity extends AppCompatActivity implements MainView, RedditObjectListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements MainView, ScrollL
     }
 
     private void setupView() {
-        toolbar.setTitle("Reddit Android");
+        toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
     }
@@ -67,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements MainView, ScrollL
 
     @Override
     public void setItems(RedditObject redditObject) {
-        rvPosts.setLayoutManager(new LinearLayoutManager(rvPosts.getContext()));
+        StaggeredGridLayoutManager sglm =
+                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        rvPosts.setLayoutManager(sglm);
         MainAdapter adapter = (MainAdapter) rvPosts.getAdapter();
         if (adapter != null) {
             adapter.concatenateDataSet(redditObject);
@@ -79,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements MainView, ScrollL
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRedditObjectClick(RedditObject redditObject) {
+
     }
 
     @Override
