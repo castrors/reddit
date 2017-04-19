@@ -22,13 +22,13 @@ import butterknife.ButterKnife;
  */
 
 class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
-    private final RedditObjectListener callback;
+    private MainPresenter presenter;
     private List<RedditObject> mDataset;
     private RedditObject parent;
 
-    MainAdapter(RedditObject parent, RedditObjectListener callback) {
+    MainAdapter(RedditObject parent, MainPresenter presenter) {
         this.parent = parent;
-        this.callback = callback;
+        this.presenter = presenter;
         mDataset = parent.getData().getChildren();
 
     }
@@ -48,7 +48,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         RedditObject redditObject = mDataset.get(position);
         if (isLast(position)) {
-            callback.onScrollLastItemCallback(parent.getData().getAfter());
+            presenter.paginate(parent.getData().getAfter());
         }
         holder.title.setText(mDataset.get(position).getData().getTitle());
         holder.description.setText(mDataset.get(position).getData().getUrl());
@@ -95,7 +95,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         public void onClick(View v) {
             int position = getAdapterPosition();
             RedditObject redditObject = mDataset.get(position);
-            callback.onRedditObjectClick(redditObject);
+            presenter.onItemClicked(redditObject);
         }
     }
 }

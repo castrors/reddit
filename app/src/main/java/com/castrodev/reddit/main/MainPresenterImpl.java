@@ -1,5 +1,6 @@
 package com.castrodev.reddit.main;
 
+
 import com.castrodev.reddit.model.RedditObject;
 
 /**
@@ -26,9 +27,9 @@ class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListe
     }
 
     @Override
-    public void onItemClicked(int position) {
+    public void onItemClicked(RedditObject redditObject) {
         if (mainView != null) {
-            mainView.showMessage(String.format("Position %d clicked", position + 1));
+            mainView.showMessage(String.format("Clicked: %s ", redditObject.getData().getTitle()));
         }
     }
 
@@ -48,9 +49,5 @@ class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListe
             mainView.setItems(redditObject);
             mainView.hideProgress();
         }
-    }
-
-    public MainView getMainView() {
-        return mainView;
     }
 }

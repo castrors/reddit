@@ -16,7 +16,7 @@ import com.castrodev.reddit.model.RedditObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView, RedditObjectListener {
+public class MainActivity extends AppCompatActivity implements MainView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements MainView, RedditO
             StaggeredGridLayoutManager sglm =
                     new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
             rvPosts.setLayoutManager(sglm);
-            rvPosts.setAdapter(new MainAdapter(redditObject, this));
+            rvPosts.setAdapter(new MainAdapter(redditObject, presenter));
         } else {
             adapter.concatenateDataSet(redditObject);
         }
@@ -80,16 +80,7 @@ public class MainActivity extends AppCompatActivity implements MainView, RedditO
 
     @Override
     public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onRedditObjectClick(RedditObject redditObject) {
-        Toast.makeText(this, redditObject.getData().getTitle(), Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onScrollLastItemCallback(String after) {
-        presenter.paginate(after);
-    }
 }
