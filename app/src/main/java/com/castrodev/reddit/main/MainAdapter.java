@@ -63,6 +63,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         mDataset.addAll(redditObject.getData().getChildren());
         parent = redditObject;
         parent.getData().setChildren(mDataset);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -86,9 +87,13 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         holder.description.setText(mDataset.get(position).getData().getUrl());
 
         Context context = holder.thumbnail.getContext();
-        Picasso.with(context).load(redditObject.getData().getThumbnail()).into(holder.thumbnail);
+        Picasso.with(context)
+                .load(redditObject.getData().getThumbnail())
+                .error(R.drawable.ic_error_image)
+                .into(holder.thumbnail);
 
     }
+
 
     private boolean isLast(int position) {
         return mDataset.get(position).getData().getName().equals(parent.getData().getAfter());

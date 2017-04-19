@@ -67,14 +67,14 @@ public class MainActivity extends AppCompatActivity implements MainView, RedditO
 
     @Override
     public void setItems(RedditObject redditObject) {
-        StaggeredGridLayoutManager sglm =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvPosts.setLayoutManager(sglm);
         MainAdapter adapter = (MainAdapter) rvPosts.getAdapter();
-        if (adapter != null) {
-            adapter.concatenateDataSet(redditObject);
-        } else {
+        if (adapter == null) {
+            StaggeredGridLayoutManager sglm =
+                    new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            rvPosts.setLayoutManager(sglm);
             rvPosts.setAdapter(new MainAdapter(redditObject, this));
+        } else {
+            adapter.concatenateDataSet(redditObject);
         }
     }
 
