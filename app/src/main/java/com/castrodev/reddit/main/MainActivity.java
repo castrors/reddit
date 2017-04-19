@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements MainView, RedditO
 
     @Override
     public void onRedditObjectClick(RedditObject redditObject) {
-
+        Toast.makeText(this, redditObject.getData().getTitle(), Toast.LENGTH_LONG).show();
     }
 
     @Override

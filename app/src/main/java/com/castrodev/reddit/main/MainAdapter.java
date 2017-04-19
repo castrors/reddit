@@ -25,45 +25,12 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private final RedditObjectListener callback;
     private List<RedditObject> mDataset;
     private RedditObject parent;
-    private RedditObjectListener mItemListener;
-
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.tv_post_title)
-        TextView title;
-        @BindView(R.id.tv_post_subtitle)
-        TextView description;
-        @BindView(R.id.iv_post_thumb)
-        ImageView thumbnail;
-
-        private RedditObjectListener mItemListener;
-
-         ViewHolder(View itemView, RedditObjectListener listener) {
-            super(itemView);
-            mItemListener = listener;
-             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-
-        }
-    }
-
-
 
     MainAdapter(RedditObject parent, RedditObjectListener callback) {
         this.parent = parent;
         this.callback = callback;
         mDataset = parent.getData().getChildren();
 
-    }
-
-    void concatenateDataSet(RedditObject redditObject) {
-        mDataset.addAll(redditObject.getData().getChildren());
-        parent = redditObject;
-        parent.getData().setChildren(mDataset);
-        notifyDataSetChanged();
     }
 
     @Override
@@ -74,13 +41,13 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
         View noteView = inflater.inflate(R.layout.item_posts, parent, false);
 
-        return new ViewHolder(noteView, mItemListener);
+        return new ViewHolder(noteView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         RedditObject redditObject = mDataset.get(position);
-        if(isLast(position)){
+        if (isLast(position)) {
             callback.onScrollLastItemCallback(parent.getData().getAfter());
         }
         holder.title.setText(mDataset.get(position).getData().getTitle());
@@ -94,13 +61,41 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     }
 
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
+    }
 
     private boolean isLast(int position) {
         return mDataset.get(position).getData().getName().equals(parent.getData().getAfter());
     }
 
-    @Override
-    public int getItemCount() {
-        return mDataset.size();
+    void concatenateDataSet(RedditObject redditObject) {
+        mDataset.addAll(redditObject.getData().getChildren());
+        parent = redditObject;
+        parent.getData().setChildren(mDataset);
+        notifyDataSetChanged();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @BindView(R.id.tv_post_title)
+        TextView title;
+        @BindView(R.id.tv_post_subtitle)
+        TextView description;
+        @BindView(R.id.iv_post_thumb)
+        ImageView thumbnail;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            RedditObject redditObject = mDataset.get(position);
+            callback.onRedditObjectClick(redditObject);
+        }
     }
 }
