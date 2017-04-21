@@ -25,6 +25,7 @@ dependencies {
     compile "com.android.support:design:${project.supportLibraryVersion}"
     compile "com.android.support:appcompat-v7:${project.supportLibraryVersion}"
     compile "com.android.support:cardview-v7:${project.supportLibraryVersion}"
+    compile "com.android.support.constraint:constraint-layout:${project.constraintLayoutVersion}"
     compile "com.squareup.picasso:picasso:${project.picassoVersion}"
     compile "com.squareup.retrofit2:retrofit:${project.retrofitVersion}"
     compile "com.squareup.retrofit2:converter-gson:${project.retrofitVersion}"
@@ -36,4 +37,5 @@ dependencies {
 
     testCompile "junit:junit:${project.junitVersion}"
     testCompile "org.mockito:mockito-core:${project.mockitoVersion}"
+
 }

@@ -40,4 +40,5 @@ ext {
     okHttpVersion = '3.6.0'
     javaxVersion = '1.2'
     gsonVersion = '2.7'
+    constraintLayoutVersion = '1.0.2'
 }
