@@ -64,6 +64,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     private void setupView() {
         toolbar.setTitle(redditParcelableObject.getTitle());
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Resources res = getResources();
         tvAuthor.setText(
