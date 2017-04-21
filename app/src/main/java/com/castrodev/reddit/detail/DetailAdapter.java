@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.RedditObject;
 
+import org.threeten.bp.Instant;
+
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,8 +50,16 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         RedditObject redditObject = mDataset.get(position);
         holder.username.setText(redditObject.getData().getAuthor());
-        holder.sentAt.setText(String.valueOf(redditObject.getData().getCreated()));
+        holder.sentAt.setText(getTimeDifferenceInMinutes(redditObject.getData().getCreatedUtc()));
         holder.comment.setText(redditObject.getData().getBody());
+    }
+
+    private String getTimeDifferenceInMinutes(Long created) {
+        Date comment = new Date(created*1000);
+        Long difference =  Instant.now().toEpochMilli() - comment.getTime();
+        return difference/1000/60+ " min ago";
+
+
     }
 
     @Override

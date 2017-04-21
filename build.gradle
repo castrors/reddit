@@ -41,4 +41,5 @@ ext {
     javaxVersion = '1.2'
     gsonVersion = '2.7'
     constraintLayoutVersion = '1.0.2'
+    threeTenAbpVersion = '1.0.5'
 }

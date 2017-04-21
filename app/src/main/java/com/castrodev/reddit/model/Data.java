@@ -38,9 +38,9 @@ public class Data {
     @SerializedName("contest_mode")
     private Boolean mContestMode;
     @SerializedName("created")
-    private Double mCreated;
+    private Long mCreated;
     @SerializedName("created_utc")
-    private Double mCreatedUtc;
+    private Long mCreatedUtc;
     @SerializedName("distinguished")
     private Object mDistinguished;
     @SerializedName("domain")
@@ -236,19 +236,19 @@ public class Data {
         mContestMode = contestMode;
     }
 
-    public Double getCreated() {
+    public Long getCreated() {
         return mCreated;
     }
 
-    public void setCreated(Double created) {
+    public void setCreated(Long created) {
         mCreated = created;
     }
 
-    public Double getCreatedUtc() {
+    public Long getCreatedUtc() {
         return mCreatedUtc;
     }
 
-    public void setCreatedUtc(Double createdUtc) {
+    public void setCreatedUtc(Long createdUtc) {
         mCreatedUtc = createdUtc;
     }
 
