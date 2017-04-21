@@ -43,7 +43,8 @@
             <ProgressBar
                 android:id="@+id/progress"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:padding="@dimen/progress_padding"/>
         </FrameLayout>
 
     </android.support.design.widget.CoordinatorLayout>
