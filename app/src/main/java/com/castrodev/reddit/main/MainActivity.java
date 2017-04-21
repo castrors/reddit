@@ -1,5 +1,6 @@
 package com.castrodev.reddit.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -8,15 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.castrodev.reddit.R;
+import com.castrodev.reddit.detail.DetailActivity;
 import com.castrodev.reddit.model.RedditObject;
+import com.castrodev.reddit.model.RedditParcelableObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements MainView {
+
+    public static final String KEY = "PARCELABLE_OBJECT_KEY";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -79,8 +83,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void goToDetailActivity(RedditParcelableObject redditParcelableObject) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(KEY, redditParcelableObject);
+        startActivity(intent);
     }
 
 }

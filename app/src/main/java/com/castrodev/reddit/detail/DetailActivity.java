@@ -9,11 +9,14 @@ import android.widget.ProgressBar;
 
 import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.RedditObject;
+import com.castrodev.reddit.model.RedditParcelableObject;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.castrodev.reddit.main.MainActivity.KEY;
 
 public class DetailActivity extends AppCompatActivity implements DetailView {
 
@@ -25,6 +28,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     ProgressBar progressBar;
 
     private DetailPresenter presenter;
+    private RedditParcelableObject redditParcelableObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +37,14 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         ButterKnife.bind(this);
 
         presenter = new DetailPresenterImpl(this, new DetailInteractorImpl());
+        getParcelableObject();
         setupView();
+    }
+
+    private void getParcelableObject() {
+        if (getIntent().hasExtra(KEY)) {
+            redditParcelableObject = getIntent().getParcelableExtra(KEY);
+        }
     }
 
     private void setupView() {
@@ -44,7 +55,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.onResume("permalink");
+        presenter.onResume(redditParcelableObject.getPermalink());
     }
 
     @Override
