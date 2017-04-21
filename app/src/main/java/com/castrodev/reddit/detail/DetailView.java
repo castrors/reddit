@@ -13,4 +13,5 @@ public interface DetailView {
     void showProgress();
     void hideProgress();
     void setItems(List<RedditObject> redditObjectList);
+    void openPostLink(String url);
 }

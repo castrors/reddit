@@ -50,7 +50,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
-        presenter = new DetailPresenterImpl(this, new DetailInteractorImpl());
+        presenter = new DetailPresenterImpl(this, new DetailInteractorImpl(), redditParcelableObject.getPermalink());
         getParcelableObject();
         setupView();
     }
@@ -83,7 +83,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.onResume(redditParcelableObject.getPermalink());
+        presenter.onResume();
     }
 
     @Override
@@ -106,11 +106,15 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         rvComments.setAdapter(new DetailAdapter(objectWithComments, presenter));
     }
 
-    @OnClick(R.id.fabNavigate)
-    public void onFabClicked(View v) {
-        String url = redditParcelableObject.getUrl();
+    @Override
+    public void openPostLink(String url) {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
+    }
+
+    @OnClick(R.id.fabNavigate)
+    public void onFabClicked(View v) {
+        presenter.onFloatingActionButtonClicked(redditParcelableObject);
     }
 }

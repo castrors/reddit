@@ -1,6 +1,7 @@
 package com.castrodev.reddit.detail;
 
 import com.castrodev.reddit.model.RedditObject;
+import com.castrodev.reddit.model.RedditParcelableObject;
 
 import java.util.List;
 
@@ -13,18 +14,27 @@ class DetailPresenterImpl implements DetailPresenter, DetailInteractor.OnFinishe
 
     private DetailView detailView;
     private DetailInteractor detailInteractor;
+    private final String permalink;
 
-    DetailPresenterImpl(DetailView detailView, DetailInteractor detailInteractor) {
+    DetailPresenterImpl(DetailView detailView, DetailInteractor detailInteractor, String permalink) {
         this.detailView = detailView;
         this.detailInteractor = detailInteractor;
+        this.permalink = permalink;
     }
 
     @Override
-    public void onResume(String permalink) {
+    public void onResume() {
         if (detailView != null) {
             detailView.showProgress();
         }
         detailInteractor.requestComments(permalink, this);
+    }
+
+    @Override
+    public void onFloatingActionButtonClicked(RedditParcelableObject redditParcelableObject) {
+        if(detailView !=null){
+            detailView.openPostLink(redditParcelableObject.getUrl());
+        }
     }
 
     @Override
@@ -38,5 +48,9 @@ class DetailPresenterImpl implements DetailPresenter, DetailInteractor.OnFinishe
             detailView.setItems(items);
             detailView.hideProgress();
         }
+    }
+
+    public DetailView getDetailView() {
+        return detailView;
     }
 }
