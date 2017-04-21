@@ -42,13 +42,15 @@ class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListe
     private RedditParcelableObject getRedditParcelableObject(RedditObject redditObject) {
 
         RedditParcelableObject parcelableObject = new RedditParcelableObject();
-        Data data = redditObject.getData();
-        parcelableObject.setThumbnail(data.getThumbnail());
-        parcelableObject.setPermalink(data.getPermalink());
-        parcelableObject.setNumComments(data.getNumComments());
-        parcelableObject.setTitle(data.getTitle());
-        parcelableObject.setUrl(data.getUrl());
-        parcelableObject.setAuthor(data.getAuthor());
+        if (redditObject != null && redditObject.getData() != null) {
+            Data data = redditObject.getData();
+            parcelableObject.setThumbnail(data.getThumbnail());
+            parcelableObject.setPermalink(data.getPermalink());
+            parcelableObject.setNumComments(data.getNumComments());
+            parcelableObject.setTitle(data.getTitle());
+            parcelableObject.setUrl(data.getUrl());
+            parcelableObject.setAuthor(data.getAuthor());
+        }
         return parcelableObject;
     }
 
@@ -68,5 +70,9 @@ class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListe
             mainView.setItems(redditObject);
             mainView.hideProgress();
         }
+    }
+
+    public MainView getMainView() {
+        return mainView;
     }
 }
