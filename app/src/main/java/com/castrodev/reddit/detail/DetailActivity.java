@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -99,7 +100,9 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
 
     @Override
     public void setItems(List<RedditObject> redditObjectList) {
-
+        RedditObject objectWithComments = redditObjectList.get(1);
+        rvComments.setLayoutManager(new LinearLayoutManager(this));
+        rvComments.setAdapter(new DetailAdapter(objectWithComments, presenter));
     }
 
     @OnClick(R.id.fabNavigate)

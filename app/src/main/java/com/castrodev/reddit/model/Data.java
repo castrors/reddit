@@ -29,6 +29,8 @@ public class Data {
     private Object mBefore;
     @SerializedName("brand_safe")
     private Boolean mBrandSafe;
+    @SerializedName("body")
+    private String mBody;
     @SerializedName("children")
     private List<RedditObject> mChildren;
     @SerializedName("clicked")
@@ -200,6 +202,14 @@ public class Data {
 
     public void setBrandSafe(Boolean brandSafe) {
         mBrandSafe = brandSafe;
+    }
+
+    public String getBody() {
+        return mBody;
+    }
+
+    public void setBody(String mBody) {
+        this.mBody = mBody;
     }
 
     public List<RedditObject> getChildren() {
