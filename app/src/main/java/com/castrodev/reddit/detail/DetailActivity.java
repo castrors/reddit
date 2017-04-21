@@ -1,20 +1,27 @@
 package com.castrodev.reddit.detail;
 
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.model.RedditParcelableObject;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.castrodev.reddit.main.MainActivity.KEY;
 
@@ -26,6 +33,12 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     RecyclerView rvComments;
     @BindView(R.id.progress)
     ProgressBar progressBar;
+    @BindView(R.id.iv_detail_post)
+    ImageView ivDetailPost;
+    @BindView(R.id.tv_author)
+    TextView tvAuthor;
+    @BindView(R.id.tv_comment_count)
+    TextView tvCommentCount;
 
     private DetailPresenter presenter;
     private RedditParcelableObject redditParcelableObject;
@@ -48,10 +61,23 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     }
 
     private void setupView() {
-        toolbar.setTitle(R.string.title_activity_detail);
+        toolbar.setTitle(redditParcelableObject.getTitle());
         setSupportActionBar(toolbar);
 
+        Resources res = getResources();
+        tvAuthor.setText(
+                String.format(res.getString(R.string.author_name)
+                        , redditParcelableObject.getAuthor()));
+        tvCommentCount.setText(
+                String.format(res.getString(R.string.comments_count)
+                        , redditParcelableObject.getNumComments()));
+
+        Picasso.with(this)
+                .load(redditParcelableObject.getThumbnail())
+                .error(R.drawable.ic_error_image)
+                .into(ivDetailPost);
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -74,5 +100,13 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     @Override
     public void setItems(List<RedditObject> redditObjectList) {
 
+    }
+
+    @OnClick(R.id.fabNavigate)
+    public void onFabClicked(View v) {
+        String url = redditParcelableObject.getUrl();
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 }

@@ -1,5 +1,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -14,7 +15,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="28dp"
-            android:paddingTop="116dp"
+            android:paddingTop="164dp"
             android:scrollbarStyle="outsideOverlay"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </android.support.v4.widget.SwipeRefreshLayout>
@@ -22,15 +23,27 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="112dp"
+        android:layout_height="160dp"
         android:gravity="bottom">
 
         <FrameLayout
             android:id="@+id/toolbar_container"
             android:layout_width="match_parent"
-            android:layout_height="112dp"
+            android:layout_height="160dp"
             android:background="?colorPrimary"
             android:elevation="8dp">
+
+            <ImageView
+                android:id="@+id/iv_detail_post"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/scrim_gradient" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -40,30 +53,41 @@
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-                <ImageView
-                    android:id="@+id/iv_detail_post"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/app_name" />
+                    android:orientation="vertical">
 
+                    <TextView
+                        android:id="@+id/tv_author"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/author_name" />
+
+                    <TextView
+                        android:id="@+id/tv_comment_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/comments_count" />
+                </LinearLayout>
             </android.support.v7.widget.Toolbar>
         </FrameLayout>
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabNavigate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        app:fabSize="normal"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_navigate" />
 
     <ProgressBar
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/progress_padding"/>
+        android:padding="@dimen/progress_padding" />
 
 </android.support.design.widget.CoordinatorLayout>

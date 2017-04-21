@@ -26,6 +26,7 @@ public class RedditParcelableObject implements Parcelable {
         title = in.readString();
         url = in.readString();
         author = in.readString();
+        numComments = in.readLong();
     }
 
     public static final Creator<RedditParcelableObject> CREATOR = new Creator<RedditParcelableObject>() {
@@ -100,5 +101,6 @@ public class RedditParcelableObject implements Parcelable {
         dest.writeString(title);
         dest.writeString(url);
         dest.writeString(author);
+        dest.writeLong(numComments);
     }
 }
