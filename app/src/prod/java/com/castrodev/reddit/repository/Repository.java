@@ -5,10 +5,6 @@ import com.castrodev.reddit.repository.Implementation.PostRepositoryImpl;
 import com.castrodev.reddit.repository.Interface.CommentRepository;
 import com.castrodev.reddit.repository.Interface.PostRespository;
 
-/**
- * Created by rodrigocastro on 21/04/17.
- */
-
 public class Repository {
 
     private static PostRespository postRespository;
