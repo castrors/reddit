@@ -23,14 +23,12 @@ public class DetailPresenterTest {
 
     @Mock
     DetailView view;
-    @Mock
-    DetailInteractor interactor;
 
     private DetailPresenterImpl presenter;
 
     @Before
     public void setUp() throws Exception {
-        presenter = new DetailPresenterImpl(view, interactor, "permalink");
+        presenter = new DetailPresenterImpl(view, "permalink");
     }
 
     @Test

@@ -26,14 +26,12 @@ public class MainPresenterTest {
 
     @Mock
     MainView view;
-    @Mock
-    MainInteractor interactor;
 
     private MainPresenterImpl presenter;
 
     @Before
     public void setUp() throws Exception {
-        presenter = new MainPresenterImpl(view, interactor);
+        presenter = new MainPresenterImpl(view);
     }
 
     @Test
