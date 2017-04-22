@@ -50,8 +50,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
 
-        presenter = new DetailPresenterImpl(this, new DetailInteractorImpl(), redditParcelableObject.getPermalink());
         getParcelableObject();
+        presenter = new DetailPresenterImpl(this, redditParcelableObject.getPermalink());
         setupView();
     }
 

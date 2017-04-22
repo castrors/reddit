@@ -2,6 +2,8 @@ package com.castrodev.reddit.detail;
 
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.model.RedditParcelableObject;
+import com.castrodev.reddit.repository.Interface.CommentRepository;
+import com.castrodev.reddit.repository.Repository;
 
 import java.util.List;
 
@@ -10,15 +12,14 @@ import java.util.List;
  */
 
 
-class DetailPresenterImpl implements DetailPresenter, DetailInteractor.OnFinishedListener {
+class DetailPresenterImpl implements DetailPresenter, CommentRepository.OnFinishedListener {
 
     private DetailView detailView;
-    private DetailInteractor detailInteractor;
     private final String permalink;
+    private CommentRepository repository = Repository.providesCommentRepository();
 
-    DetailPresenterImpl(DetailView detailView, DetailInteractor detailInteractor, String permalink) {
+    DetailPresenterImpl(DetailView detailView, String permalink) {
         this.detailView = detailView;
-        this.detailInteractor = detailInteractor;
         this.permalink = permalink;
     }
 
@@ -27,12 +28,12 @@ class DetailPresenterImpl implements DetailPresenter, DetailInteractor.OnFinishe
         if (detailView != null) {
             detailView.showProgress();
         }
-        detailInteractor.requestComments(permalink, this);
+        repository.getComments(permalink, this);
     }
 
     @Override
     public void onFloatingActionButtonClicked(RedditParcelableObject redditParcelableObject) {
-        if(detailView !=null){
+        if (detailView != null) {
             detailView.openPostLink(redditParcelableObject.getUrl());
         }
     }

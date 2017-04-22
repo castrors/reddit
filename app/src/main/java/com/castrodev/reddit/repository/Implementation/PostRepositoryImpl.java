@@ -1,20 +1,22 @@
-package com.castrodev.reddit.main;
+package com.castrodev.reddit.repository.Implementation;
 
 import com.castrodev.reddit.api.ApiClient;
 import com.castrodev.reddit.api.ApiService;
 import com.castrodev.reddit.model.RedditObject;
+import com.castrodev.reddit.repository.Interface.PostRespository;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by rodrigocastro on 18/04/17.
+ * Created by rodrigocastro on 21/04/17.
  */
 
-class MainInteractorImpl implements MainInteractor {
+public class PostRepositoryImpl extends PostRespository {
+
     @Override
-    public void requestPosts(String after, String limit, final OnFinishedListener listener) {
+    public void getPosts(String after, String limit, final PostRespository.OnFinishedListener listener) {
         ApiService apiService =
                 ApiClient.getClient().create(ApiService.class);
 
@@ -31,5 +33,4 @@ class MainInteractorImpl implements MainInteractor {
             }
         });
     }
-
 }

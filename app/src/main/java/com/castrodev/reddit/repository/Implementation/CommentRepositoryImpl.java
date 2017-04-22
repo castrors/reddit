@@ -1,8 +1,9 @@
-package com.castrodev.reddit.detail;
+package com.castrodev.reddit.repository.Implementation;
 
 import com.castrodev.reddit.api.ApiClient;
 import com.castrodev.reddit.api.ApiService;
 import com.castrodev.reddit.model.RedditObject;
+import com.castrodev.reddit.repository.Interface.CommentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by rodrigocastro on 20/04/17.
+ * Created by rodrigocastro on 21/04/17.
  */
 
-public class DetailInteractorImpl implements DetailInteractor {
+public class CommentRepositoryImpl extends CommentRepository {
+
     @Override
-    public void requestComments(String permalink, final OnFinishedListener listener) {
+    public void getComments(String permalink, final CommentRepository.OnFinishedListener listener) {
         ApiService apiService =
                 ApiClient.getClient().create(ApiService.class);
 

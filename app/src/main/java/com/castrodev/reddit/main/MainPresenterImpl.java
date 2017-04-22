@@ -6,19 +6,20 @@ import android.support.annotation.NonNull;
 import com.castrodev.reddit.model.Data;
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.model.RedditParcelableObject;
+import com.castrodev.reddit.repository.Interface.PostRespository;
+import com.castrodev.reddit.repository.Repository;
 
 /**
  * Created by rodrigocastro on 18/04/17.
  */
 
-class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListener {
+class MainPresenterImpl implements MainPresenter, PostRespository.OnFinishedListener {
 
     private MainView mainView;
-    private MainInteractor mainInteractor;
+    private PostRespository respository = Repository.providesPostRepository();
 
-    MainPresenterImpl(MainView mainView, MainInteractor mainInteractor) {
+    MainPresenterImpl(MainView mainView) {
         this.mainView = mainView;
-        this.mainInteractor = mainInteractor;
     }
 
     @Override
@@ -26,8 +27,7 @@ class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListe
         if (mainView != null) {
             mainView.showProgress();
         }
-
-        mainInteractor.requestPosts("", "10", this);
+        respository.getPosts("", "10", this);
     }
 
     @Override
@@ -61,7 +61,7 @@ class MainPresenterImpl implements MainPresenter, MainInteractor.OnFinishedListe
 
     @Override
     public void paginate(String after) {
-        mainInteractor.requestPosts(after, "10", this);
+        respository.getPosts(after, "10", this);
     }
 
     @Override
