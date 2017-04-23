@@ -16,6 +16,7 @@ import com.castrodev.reddit.R;
 import com.castrodev.reddit.main.MainActivity;
 import com.castrodev.reddit.model.RedditParcelableObject;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,6 +30,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class DetailActivityTest {
+
+
 
     private static String OBJECT_THUMB = "https://b.thumbs.redditmedia.com/RMsb7u_fBrTFstZVXvnK6zhzMFpT8eaAtFortQqXS5E.jpg";
 
@@ -48,6 +51,7 @@ public class DetailActivityTest {
     public ActivityTestRule<DetailActivity> mPostDetailActivityTestRule =
             new ActivityTestRule<>(DetailActivity.class, true,
                     false);
+
 
     @Before
     public void intentWithStubbedRedditParcelableObject() {
@@ -71,6 +75,12 @@ public class DetailActivityTest {
 
         onView(withId(R.id.tv_author)).check(matches(withText(authorName)));
         onView(withId(R.id.tv_comment_count)).check(matches(withText(numComments)));
+    }
+
+    @After
+    public void unregisterIdlingResource() {
+        Espresso.unregisterIdlingResources(
+                mPostDetailActivityTestRule.getActivity().getCountingIdlingResource());
     }
 
     private void registerIdlingResource() {
