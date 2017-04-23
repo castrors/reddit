@@ -14,4 +14,6 @@ public final class RedditApplication extends Application {
         super.onCreate();
         AndroidThreeTen.init(this);
     }
+
+
 }
