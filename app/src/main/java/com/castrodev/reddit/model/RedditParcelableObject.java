@@ -20,6 +20,15 @@ public class RedditParcelableObject implements Parcelable {
 
     }
 
+    public RedditParcelableObject(String thumbnail, String permalink, Long numComments, String title, String url, String author) {
+        this.thumbnail = thumbnail;
+        this.permalink = permalink;
+        this.numComments = numComments;
+        this.title = title;
+        this.url = url;
+        this.author = author;
+    }
+
     protected RedditParcelableObject(Parcel in) {
         thumbnail = in.readString();
         permalink = in.readString();

@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.model.RedditParcelableObject;
+import com.castrodev.reddit.util.EspressoIdlingResource;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -116,5 +119,10 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     @OnClick(R.id.fabNavigate)
     public void onFabClicked(View v) {
         presenter.onFloatingActionButtonClicked(redditParcelableObject);
+    }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
     }
 }
