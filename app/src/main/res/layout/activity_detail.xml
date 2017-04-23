@@ -22,13 +22,7 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <TextView
-        android:id="@+id/tv_error"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone"
-        android:text="@string/unexpected_error" />
+    <include layout="@layout/error_view"/>
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

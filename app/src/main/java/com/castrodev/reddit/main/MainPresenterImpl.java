@@ -27,11 +27,11 @@ class MainPresenterImpl implements MainPresenter, PostRespository.OnFinishedList
     public void onResume() {
         if (mainView != null) {
 
+            mainView.showProgress();
             if (!mainView.isConnected()) {
                 handleErrorCallback(R.string.internet_error);
                 return;
             }
-            mainView.showProgress();
         }
         respository.getPosts("", "10", this);
     }

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -46,6 +47,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     TextView tvCommentCount;
     @BindView(R.id.tv_error)
     TextView tvError;
+    @BindView(R.id.error_view)
+    View errorView;
 
     private DetailPresenter presenter;
     private RedditParcelableObject redditParcelableObject;
@@ -107,6 +110,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
 
     @Override
     public void setItems(List<RedditObject> redditObjectList) {
+        errorView.setVisibility(View.GONE);
         RedditObject objectWithComments = redditObjectList.get(1);
         rvComments.setLayoutManager(new LinearLayoutManager(this));
         rvComments.setAdapter(new DetailAdapter(objectWithComments, presenter));
@@ -122,7 +126,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     @Override
     public void showError(int message) {
         rvComments.setVisibility(View.GONE);
-        tvError.setVisibility(View.VISIBLE);
+        errorView.setVisibility(View.VISIBLE);
         tvError.setText(message);
     }
 
@@ -139,5 +143,10 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     @VisibleForTesting
     public IdlingResource getCountingIdlingResource() {
         return EspressoIdlingResource.getIdlingResource();
+    }
+
+    @OnClick(R.id.bt_try_again)
+    public void tryAgain(View v){
+        presenter.onResume();
     }
 }

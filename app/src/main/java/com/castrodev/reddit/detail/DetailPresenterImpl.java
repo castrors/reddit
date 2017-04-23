@@ -28,14 +28,12 @@ class DetailPresenterImpl implements DetailPresenter, CommentRepository.OnFinish
     public void onResume() {
         if (detailView != null) {
 
+            detailView.showProgress();
             if (!detailView.isConnected()) {
                 handleErrorCallback(R.string.internet_error);
                 return;
             }
-
-            detailView.showProgress();
         }
-
         repository.getComments(permalink, this);
     }
 

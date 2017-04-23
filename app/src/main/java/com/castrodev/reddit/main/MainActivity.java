@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.castrodev.reddit.util.NetworkUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     TextView tvError;
     @BindView(R.id.progress)
     ProgressBar progressBar;
+    @BindView(R.id.error_view)
+    View errorView;
 
     private MainPresenter presenter;
 
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void setItems(RedditObject redditObject) {
+        errorView.setVisibility(View.GONE);
         MainAdapter adapter = (MainAdapter) rvPosts.getAdapter();
         if (adapter == null) {
             StaggeredGridLayoutManager sglm =
@@ -93,13 +98,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void showError(int message) {
         rvPosts.setVisibility(View.GONE);
-        tvError.setVisibility(View.VISIBLE);
+        errorView.setVisibility(View.VISIBLE);
         tvError.setText(message);
     }
 
     @Override
     public boolean isConnected() {
         return NetworkUtils.isConnected(this);
+    }
+
+    @OnClick(R.id.bt_try_again)
+    public void tryAgain(View v){
+        presenter.onResume();
     }
 
 }

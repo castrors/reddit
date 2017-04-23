@@ -5,4 +5,5 @@
     <string name="title_activity_detail">Details</string>
     <string name="comments_count">Comments: %d</string>
     <string name="author_name">Author: %s</string>
+    <string name="try_again">Try again</string>
 </resources>
