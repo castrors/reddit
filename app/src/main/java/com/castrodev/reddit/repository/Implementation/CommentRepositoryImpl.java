@@ -31,7 +31,7 @@ public class CommentRepositoryImpl extends CommentRepository {
 
             @Override
             public void onFailure(Call<List<RedditObject>> call, Throwable t) {
-                listener.onError();
+                listener.onDefaultError();
             }
         });
     }

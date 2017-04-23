@@ -29,7 +29,7 @@ public class PostRepositoryImpl extends PostRespository {
 
             @Override
             public void onFailure(Call<RedditObject> call, Throwable t) {
-                listener.onFinished(new RedditObject());
+                listener.onDefaultError();
             }
         });
     }

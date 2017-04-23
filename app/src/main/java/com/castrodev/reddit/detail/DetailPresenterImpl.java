@@ -1,5 +1,6 @@
 package com.castrodev.reddit.detail;
 
+import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.model.RedditParcelableObject;
 import com.castrodev.reddit.repository.Interface.CommentRepository;
@@ -26,8 +27,15 @@ class DetailPresenterImpl implements DetailPresenter, CommentRepository.OnFinish
     @Override
     public void onResume() {
         if (detailView != null) {
+
+            if (!detailView.isConnected()) {
+                handleErrorCallback(R.string.internet_error);
+                return;
+            }
+
             detailView.showProgress();
         }
+
         repository.getComments(permalink, this);
     }
 
@@ -43,6 +51,7 @@ class DetailPresenterImpl implements DetailPresenter, CommentRepository.OnFinish
         detailView = null;
     }
 
+
     @Override
     public void onFinished(List<RedditObject> items) {
         if (detailView != null) {
@@ -52,9 +61,13 @@ class DetailPresenterImpl implements DetailPresenter, CommentRepository.OnFinish
     }
 
     @Override
-    public void onError() {
-        if(detailView!=null){
-            detailView.showDefaultError();
+    public void onDefaultError() {
+        handleErrorCallback(R.string.unexpected_error);
+    }
+
+    private void handleErrorCallback(int error) {
+        if (detailView != null) {
+            detailView.showError(error);
             detailView.hideProgress();
         }
     }

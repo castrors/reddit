@@ -13,5 +13,6 @@ interface MainView {
     void hideProgress();
     void setItems(RedditObject redditObject);
     void goToDetailActivity(RedditParcelableObject redditParcelableObject);
-    void showDefaultError();
+    void showError(int message);
+    boolean isConnected();
 }

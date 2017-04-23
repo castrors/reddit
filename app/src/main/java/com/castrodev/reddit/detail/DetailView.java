@@ -14,5 +14,6 @@ public interface DetailView {
     void hideProgress();
     void setItems(List<RedditObject> redditObjectList);
     void openPostLink(String url);
-    void showDefaultError();
+    void showError(int message);
+    boolean isConnected();
 }

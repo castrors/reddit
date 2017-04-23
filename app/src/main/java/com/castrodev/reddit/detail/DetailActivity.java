@@ -19,6 +19,7 @@ import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.model.RedditParcelableObject;
 import com.castrodev.reddit.util.EspressoIdlingResource;
+import com.castrodev.reddit.util.NetworkUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -43,8 +44,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     TextView tvAuthor;
     @BindView(R.id.tv_comment_count)
     TextView tvCommentCount;
-    @BindView(R.id.tv_empty)
-    TextView tvEmpty;
+    @BindView(R.id.tv_error)
+    TextView tvError;
 
     private DetailPresenter presenter;
     private RedditParcelableObject redditParcelableObject;
@@ -119,9 +120,15 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     }
 
     @Override
-    public void showDefaultError() {
+    public void showError(int message) {
         rvComments.setVisibility(View.GONE);
-        tvEmpty.setVisibility(View.VISIBLE);
+        tvError.setVisibility(View.VISIBLE);
+        tvError.setText(message);
+    }
+
+    @Override
+    public boolean isConnected() {
+        return NetworkUtils.isConnected(this);
     }
 
     @OnClick(R.id.fabNavigate)

@@ -3,6 +3,7 @@ package com.castrodev.reddit.main;
 
 import android.support.annotation.NonNull;
 
+import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.Data;
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.model.RedditParcelableObject;
@@ -25,6 +26,11 @@ class MainPresenterImpl implements MainPresenter, PostRespository.OnFinishedList
     @Override
     public void onResume() {
         if (mainView != null) {
+
+            if (!mainView.isConnected()) {
+                handleErrorCallback(R.string.internet_error);
+                return;
+            }
             mainView.showProgress();
         }
         respository.getPosts("", "10", this);
@@ -73,9 +79,13 @@ class MainPresenterImpl implements MainPresenter, PostRespository.OnFinishedList
     }
 
     @Override
-    public void onError() {
-        if(mainView!=null){
-            mainView.showDefaultError();
+    public void onDefaultError() {
+        handleErrorCallback(R.string.unexpected_error);
+    }
+
+    private void handleErrorCallback(int error) {
+        if (mainView != null) {
+            mainView.showError(error);
             mainView.hideProgress();
         }
     }

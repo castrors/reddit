@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Reddit Android</string>
     <string name="unexpected_error">An error has occurred, please try again later.</string>
+    <string name="internet_error">There is no network connectivity, please try again later.</string>
     <string name="title_activity_detail">Details</string>
     <string name="comments_count">Comments: %d</string>
     <string name="author_name">Author: %s</string>

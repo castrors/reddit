@@ -14,6 +14,7 @@ import com.castrodev.reddit.R;
 import com.castrodev.reddit.detail.DetailActivity;
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.model.RedditParcelableObject;
+import com.castrodev.reddit.util.NetworkUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
     Toolbar toolbar;
     @BindView(R.id.rv_posts)
     RecyclerView rvPosts;
-    @BindView(R.id.tv_empty)
-    TextView tvEmpty;
+    @BindView(R.id.tv_error)
+    TextView tvError;
     @BindView(R.id.progress)
     ProgressBar progressBar;
 
@@ -90,9 +91,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void showDefaultError() {
+    public void showError(int message) {
         rvPosts.setVisibility(View.GONE);
-        tvEmpty.setVisibility(View.VISIBLE);
+        tvError.setVisibility(View.VISIBLE);
+        tvError.setText(message);
+    }
+
+    @Override
+    public boolean isConnected() {
+        return NetworkUtils.isConnected(this);
     }
 
 }
