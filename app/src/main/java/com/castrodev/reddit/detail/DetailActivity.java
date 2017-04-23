@@ -43,6 +43,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
     TextView tvAuthor;
     @BindView(R.id.tv_comment_count)
     TextView tvCommentCount;
+    @BindView(R.id.tv_empty)
+    TextView tvEmpty;
 
     private DetailPresenter presenter;
     private RedditParcelableObject redditParcelableObject;
@@ -114,6 +116,12 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);
+    }
+
+    @Override
+    public void showDefaultError() {
+        rvComments.setVisibility(View.GONE);
+        tvEmpty.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.fabNavigate)

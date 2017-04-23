@@ -5,7 +5,6 @@ import com.castrodev.reddit.api.ApiService;
 import com.castrodev.reddit.model.RedditObject;
 import com.castrodev.reddit.repository.Interface.CommentRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -32,7 +31,7 @@ public class CommentRepositoryImpl extends CommentRepository {
 
             @Override
             public void onFailure(Call<List<RedditObject>> call, Throwable t) {
-                listener.onFinished(new ArrayList<RedditObject>());
+                listener.onError();
             }
         });
     }

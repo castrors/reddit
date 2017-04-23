@@ -21,6 +21,7 @@ public class FakeCommentRepositoryImpl extends CommentRepository {
         Gson gson = new Gson();
         Type listType = new TypeToken<List<RedditObject>>(){}.getType();
         listener.onFinished((List<RedditObject>) gson.fromJson(commentsMockData, listType));
+//        listener.onError();
     }
 
 

@@ -51,6 +51,14 @@ class DetailPresenterImpl implements DetailPresenter, CommentRepository.OnFinish
         }
     }
 
+    @Override
+    public void onError() {
+        if(detailView!=null){
+            detailView.showDefaultError();
+            detailView.hideProgress();
+        }
+    }
+
     public DetailView getDetailView() {
         return detailView;
     }

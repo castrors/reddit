@@ -17,6 +17,7 @@ public class FakePostRepositoryImpl extends PostRespository {
 
             Gson gson = new Gson();
             listener.onFinished(gson.fromJson(postsMockData, RedditObject.class));
+//        listener.onError();
 
 
     }

@@ -72,6 +72,14 @@ class MainPresenterImpl implements MainPresenter, PostRespository.OnFinishedList
         }
     }
 
+    @Override
+    public void onError() {
+        if(mainView!=null){
+            mainView.showDefaultError();
+            mainView.hideProgress();
+        }
+    }
+
     public MainView getMainView() {
         return mainView;
     }

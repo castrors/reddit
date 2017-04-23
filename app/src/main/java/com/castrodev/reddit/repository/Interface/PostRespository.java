@@ -10,6 +10,7 @@ public abstract class PostRespository {
 
     public interface OnFinishedListener {
         void onFinished(RedditObject items);
+        void onError();
     }
 
     public abstract void getPosts(String after, String limit, OnFinishedListener listener);

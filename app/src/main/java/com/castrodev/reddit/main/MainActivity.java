@@ -89,4 +89,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
         startActivity(intent);
     }
 
+    @Override
+    public void showDefaultError() {
+        rvPosts.setVisibility(View.GONE);
+        tvEmpty.setVisibility(View.VISIBLE);
+    }
+
 }

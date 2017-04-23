@@ -12,6 +12,7 @@ public abstract class CommentRepository {
 
     public interface OnFinishedListener {
         void onFinished(List<RedditObject> items);
+        void onError();
     }
 
     public abstract void getComments(String permalink, final OnFinishedListener listener);
