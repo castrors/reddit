@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -137,7 +136,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
 
     @OnClick(R.id.fabNavigate)
     public void onFabClicked(View v) {
-        presenter.onFloatingActionButtonClicked(redditParcelableObject);
+        presenter.showUrl(redditParcelableObject);
     }
 
     @VisibleForTesting

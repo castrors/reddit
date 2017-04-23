@@ -9,6 +9,6 @@ import com.castrodev.reddit.model.RedditParcelableObject;
 public interface DetailPresenter {
 
     void onResume();
-    void onFloatingActionButtonClicked(RedditParcelableObject redditParcelableObject);
+    void showUrl(RedditParcelableObject redditParcelableObject);
     void onDestroy();
 }

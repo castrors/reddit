@@ -41,7 +41,7 @@ public class DetailPresenterTest {
     public void checkIfOpenPostLinkOnFABClick() {
         RedditParcelableObject redditParcelableObject = new RedditParcelableObject();
         redditParcelableObject.setUrl("url");
-        presenter.onFloatingActionButtonClicked(redditParcelableObject);
+        presenter.showUrl(redditParcelableObject);
         verify(view, times(1)).openPostLink(anyString());
     }
 

@@ -38,7 +38,7 @@ class DetailPresenterImpl implements DetailPresenter, CommentRepository.OnFinish
     }
 
     @Override
-    public void onFloatingActionButtonClicked(RedditParcelableObject redditParcelableObject) {
+    public void showUrl(RedditParcelableObject redditParcelableObject) {
         if (detailView != null) {
             detailView.openPostLink(redditParcelableObject.getUrl());
         }
