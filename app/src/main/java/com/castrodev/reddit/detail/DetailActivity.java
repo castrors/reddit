@@ -1,11 +1,12 @@
 package com.castrodev.reddit.detail;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.test.espresso.IdlingResource;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -117,9 +118,12 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
 
     @Override
     public void openPostLink(String url) {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(url));
-        startActivity(i);
+        int colorInt = ContextCompat.getColor(this, R.color.colorPrimary);
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(colorInt);
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(this, Uri.parse(url));
+
     }
 
     @Override
