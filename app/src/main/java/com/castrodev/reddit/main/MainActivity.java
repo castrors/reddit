@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.castrodev.reddit.R;
 import com.castrodev.reddit.detail.DetailActivity;
 import com.castrodev.reddit.model.RedditObject;
-import com.castrodev.reddit.model.RedditParcelableObject;
 import com.castrodev.reddit.util.NetworkUtils;
 
 import butterknife.BindView;
@@ -89,9 +87,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void goToDetailActivity(RedditParcelableObject redditParcelableObject) {
+    public void goToDetailActivity(RedditObject redditObject) {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(KEY, redditParcelableObject);
+        intent.putExtra(KEY, MainPresenterImpl.getRedditParcelableObject(redditObject));
         startActivity(intent);
     }
 
@@ -108,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @OnClick(R.id.bt_try_again)
-    public void tryAgain(View v){
+    public void tryAgain(View v) {
         presenter.onResume();
     }
 

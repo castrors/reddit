@@ -1,8 +1,6 @@
 package com.castrodev.reddit.main;
 
 
-import android.support.annotation.NonNull;
-
 import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.Data;
 import com.castrodev.reddit.model.RedditObject;
@@ -39,13 +37,11 @@ class MainPresenterImpl implements MainPresenter, PostRespository.OnFinishedList
     @Override
     public void onItemClicked(final RedditObject redditObject) {
         if (mainView != null) {
-            RedditParcelableObject parcelableObject = getRedditParcelableObject(redditObject);
-            mainView.goToDetailActivity(parcelableObject);
+            mainView.goToDetailActivity(redditObject);
         }
     }
 
-    @NonNull
-    private RedditParcelableObject getRedditParcelableObject(RedditObject redditObject) {
+    public static RedditParcelableObject getRedditParcelableObject(RedditObject redditObject) {
 
         RedditParcelableObject parcelableObject = new RedditParcelableObject();
         if (redditObject != null && redditObject.getData() != null) {

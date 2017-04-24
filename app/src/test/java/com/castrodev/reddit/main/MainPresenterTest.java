@@ -2,7 +2,6 @@ package com.castrodev.reddit.main;
 
 import com.castrodev.reddit.model.Data;
 import com.castrodev.reddit.model.RedditObject;
-import com.castrodev.reddit.model.RedditParcelableObject;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +42,7 @@ public class MainPresenterTest {
     @Test
     public void checkIfGoToDetailActivityOnItemClick() {
         presenter.onItemClicked((RedditObject) anyObject());
-        verify(view, times(1)).goToDetailActivity((RedditParcelableObject) anyObject());
+        verify(view, times(1)).goToDetailActivity((RedditObject) anyObject());
     }
 
     @Test
