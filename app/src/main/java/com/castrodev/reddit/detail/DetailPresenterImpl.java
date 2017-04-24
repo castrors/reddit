@@ -2,7 +2,6 @@ package com.castrodev.reddit.detail;
 
 import com.castrodev.reddit.R;
 import com.castrodev.reddit.model.RedditObject;
-import com.castrodev.reddit.model.RedditParcelableObject;
 import com.castrodev.reddit.repository.Interface.CommentRepository;
 import com.castrodev.reddit.repository.Repository;
 
@@ -38,9 +37,9 @@ class DetailPresenterImpl implements DetailPresenter, CommentRepository.OnFinish
     }
 
     @Override
-    public void showUrl(RedditParcelableObject redditParcelableObject) {
+    public void showUrl(String url) {
         if (detailView != null) {
-            detailView.openPostLink(redditParcelableObject.getUrl());
+            detailView.openPostLink(url);
         }
     }
 

@@ -140,7 +140,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView {
 
     @OnClick(R.id.fabNavigate)
     public void onFabClicked(View v) {
-        presenter.showUrl(redditParcelableObject);
+        presenter.showUrl(redditParcelableObject.getUrl());
     }
 
     @VisibleForTesting

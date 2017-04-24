@@ -1,7 +1,6 @@
 package com.castrodev.reddit.detail;
 
 import com.castrodev.reddit.model.RedditObject;
-import com.castrodev.reddit.model.RedditParcelableObject;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,9 +38,7 @@ public class DetailPresenterTest {
 
     @Test
     public void checkIfOpenPostLinkOnFABClick() {
-        RedditParcelableObject redditParcelableObject = new RedditParcelableObject();
-        redditParcelableObject.setUrl("url");
-        presenter.showUrl(redditParcelableObject);
+        presenter.showUrl(anyString());
         verify(view, times(1)).openPostLink(anyString());
     }
 
